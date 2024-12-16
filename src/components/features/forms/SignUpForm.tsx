@@ -4,6 +4,7 @@ import FormStatus from './FormStatus';
 import { parseFormData } from '../../../utils/utils';
 import { authServices } from '../../../supabase/services';
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js';
+import Input from '../../common/input/Input';
 
 export default function SignUpForm() {
   const [formStatus, setFormStatus] = useState<null | {
@@ -38,16 +39,10 @@ export default function SignUpForm() {
       {formStatus && <FormStatus formStatus={formStatus} />}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-indigo-900 dark:text-gray-300 mb-2"
-          >
-            Email Address
-          </label>
-          <input
+          <Input
+            label="Email"
             type="email"
             name="email"
-            id="email"
             className="shadow-sm rounded-lg w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-800 dark:focus:ring-blue-900 transition-all duration-300"
             placeholder="your@email.com"
             required
@@ -55,15 +50,8 @@ export default function SignUpForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-indigo-900 dark:text-gray-300 mb-2"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
+          <Input
+            label="Password"
             name="password"
             className="shadow-sm rounded-lg w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-800 dark:focus:ring-blue-900 transition-all duration-300"
             placeholder="Enter your password"
