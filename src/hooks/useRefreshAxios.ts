@@ -4,11 +4,15 @@ import axiosInstance from '../apis/axiosInstance';
 
 export default function useRefreshAxios() {
   const { auth, setAuth }: any = useAuth();
-  const { access_token = null, refresh_token = null } = auth || {};
+  const { access_token = null, refresh_token = null } = auth.session || {};
 
   axiosInstance.interceptors.request.use(
     (config) => {
-      config.headers.Authorization = `bearer ${access_token}`;
+      config.headers.Authorization =
+        !config._retry && access_token
+          ? `bearer ${access_token}`
+          : config.headers.Authorization;
+
       return config;
     },
     () => (err: AxiosError) => Promise.reject(err)
@@ -18,6 +22,7 @@ export default function useRefreshAxios() {
     (response) => response,
     async (err) => {
       if (err.response?.status === 403) {
+        const originalReq = err.config;
         const { headers, baseURL, url, method } = err.config;
         try {
           const { data } = await axios({
@@ -31,19 +36,11 @@ export default function useRefreshAxios() {
             },
           });
           setAuth((prev: any) => ({ ...prev, ...data }));
-
+          originalReq.headers.Authorization = `bearer ${data.access_token}`;
+          originalReq._retry = true;
+          return originalReq;
           //again request with updated token and return this response instead of origin response
           // don't call same instance because this will update on request with context value which yet not updated by new token
-
-          return await axios({
-            url,
-            baseURL,
-            method,
-            headers: {
-              ...headers,
-              Authorization: `bearer ${data.access_token}`,
-            },
-          });
         } catch (refreshError) {
           return refreshError;
         }

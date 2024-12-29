@@ -1,35 +1,46 @@
+import { useState } from 'react';
 import LoginForm from '../components/features/forms/LoginForm';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '../components/ui/tabs';
+import LoginFormWithPhone from '../components/features/forms/LoginFormWithPhone';
+
+const defaultTabs = [
+  { title: 'Login with email', comp: <LoginForm /> },
+  { title: 'Login with phone', comp: <LoginFormWithPhone /> },
+];
 
 export default function Login() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
-    <div className="min-h-screen flex items-center justify-center w-full bg-gradient-to-r from-indigo-800 to-blue-900 dark:bg-gradient-to-r dark:from-gray-900 dark:to-gray-950 p-4">
-      <div className="grid grid-cols-12 grid-flow-row gap-4">
-        <div className="col-span-12 lg:col-span-6">
-          <Tabs
-            orientation="horizontal"
-            defaultValue="account"
-            className="w-[400px]"
-          >
-            <TabsList>
-              <TabsTrigger value="email">Email</TabsTrigger>
-              <TabsTrigger value="phone">Password</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account">
-              Make changes to your account here.
-            </TabsContent>
-            <TabsContent value="password">
-              Change your password here.
-            </TabsContent>
-          </Tabs>
-        </div>
-        <div className="col-span-12 lg:col-span-6">
-          <LoginForm />
+    <div className="min-h-screen bg-gradient-to-r from-indigo-800 to-blue-900 dark:bg-gradient-to-r dark:from-gray-900 dark:to-gray-950 p-4">
+      <div className="container mx-auto">
+        <div className="flex flex-col items-center gap-14 lg:flex-row lg:items-start mx-auto">
+          <div className="flex-1">
+            <div className="flex flex-row items-center flex-wrap gap-2 lg:flex-col max-w-[300px] ml-auto">
+              {defaultTabs?.map((tb, index) => (
+                <h3
+                  onClick={() => setActiveIndex(index)}
+                  key={index}
+                  className={`p-2 w-full rounded-sm ${
+                    index === activeIndex
+                      ? 'bg-white text-indigo-800'
+                      : 'text-white'
+                  }`}
+                >
+                  {tb.title}
+                </h3>
+              ))}
+            </div>
+          </div>
+          <div className="flex-1">
+            {defaultTabs?.map((tb, i) => (
+              <div
+                key={i}
+                className={`${i === activeIndex ? 'block' : 'hidden'}`}
+              >
+                {tb.comp}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

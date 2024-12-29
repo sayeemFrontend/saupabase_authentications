@@ -7,15 +7,15 @@ import ThemeProvider from './context/ThemeProvider';
 import AuthProvider from './context/AuthProvider';
 
 createRoot(document.getElementById('root') as Container).render(
-  <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <Routes>
-            <Route path="/*" element={<RootComponent />} />
-          </Routes>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes>
+          <Route path="/*" element={<RootComponent />} />
+        </Routes>
+      </AuthProvider>
+    </ThemeProvider>
+  </BrowserRouter>
+  // </StrictMode>
 );

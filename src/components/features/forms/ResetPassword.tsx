@@ -17,8 +17,9 @@ import { Button } from '../../ui/button';
 import Input from '../../common/input/Input';
 import { DialogTitle } from '@radix-ui/react-dialog';
 
-export default function LoginForm() {
+export default function ResetPasswordForm() {
   const [formStatus, setFormStatus] = useState<FormStatusT | null>(null);
+  const [isModal, setIsModal] = useState(true);
 
   const navigate = useNavigate();
   const { setAuth }: React.SetStateAction<any> = useAuth();

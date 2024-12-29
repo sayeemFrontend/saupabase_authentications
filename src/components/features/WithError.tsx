@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
+import { DefaultProps } from '../../types';
 
-export default function WithError({ children }: { children: ReactElement }) {
+export default function WithError({ children }: DefaultProps) {
   return (
     <div className="relative">
       <div className=" absolute bg-opacity-60 flex items-center justify-center min-h-screen bg-gray-100">

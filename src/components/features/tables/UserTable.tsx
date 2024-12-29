@@ -7,6 +7,8 @@ export default function UserTable({
 
   return (
     <div className="flex flex-col">
+      <meta name="author " contextMenu="Jhon" />
+      <title>New title</title>
       <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-hidden">

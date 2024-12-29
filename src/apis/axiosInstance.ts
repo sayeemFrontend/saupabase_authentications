@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = import.meta.env.VITE_SUPABASE_APIKEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const BASE_URL =
   import.meta.env.MODE === 'development'

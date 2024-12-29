@@ -1,9 +1,8 @@
-import { ReactElement } from 'react';
 import Loader from './Loader';
 import WithError from './WithError';
+import { DefaultProps } from '../../types';
 
-interface PropsType {
-  children: ReactElement;
+interface PropsType extends DefaultProps {
   isLoading: boolean;
   isError: boolean | any;
 }
